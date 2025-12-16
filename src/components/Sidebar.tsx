@@ -10,7 +10,6 @@ import {
   GraduationCap,
   Settings,
   PlusCircle,
-  FileText,
   User,
   LogOut
 } from "lucide-react";
@@ -96,12 +95,6 @@ export const sidebarFeatures = {
         route: "/dashboard/learner/my-learning",
         description: "Enrolled courses",
         icon: GraduationCap,
-      },
-      {
-        name: "Certificates",
-        route: "/dashboard/learner/certificates",
-        description: "Your achievements",
-        icon: FileText,
       },
       {
         name: "Profile",

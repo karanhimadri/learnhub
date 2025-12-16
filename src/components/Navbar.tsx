@@ -40,9 +40,9 @@ export default function Navbar() {
   const { user } = useAuth();
 
   const avatarSeed = user?.name || user?.email || "Guest";
-  const avatarUrl = `https://api.dicebear.com/8.x/initials/svg?seed=${encodeURIComponent(
+  const avatarUrl = `https://ui-avatars.com/api/?name=${encodeURIComponent(
     avatarSeed
-  )}`;
+  )}&background=random&color=fff&size=128`;
 
   return (
     <header className="sticky top-0 z-50 bg-white/95 backdrop-blur-sm border-b border-gray-200">

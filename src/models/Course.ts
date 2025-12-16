@@ -91,7 +91,6 @@ const CourseSchema = new Schema<ICourse>(
 );
 
 CourseSchema.index({ isPublic: 1, category: 1 });
-CourseSchema.index({ level: 1 });
 CourseSchema.index({ rating: -1 });
 CourseSchema.index({ price: 1 });
 

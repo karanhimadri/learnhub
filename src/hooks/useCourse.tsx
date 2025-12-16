@@ -37,6 +37,19 @@ export type InstructorCourse = {
   updatedAt: string;
 };
 
+export type PublicCourse = {
+  id: string;
+  title: string;
+  instructor: string;
+  skills: string[];
+  level: CourseLevel;
+  category: string;
+  duration: string;
+  price: number;
+  rating: number;
+  ratingCount: number;
+};
+
 export type InstructorCourseStats = {
   total: number;
   public: number;
@@ -59,6 +72,7 @@ type CourseContextValue = {
   creating: boolean;
   error: string | null;
   createCourse: (payload: CreateCourseInput) => Promise<void>;
+  fetchPublicCourses: () => Promise<PublicCourse[]>;
   fetchInstructorCourses: () => Promise<InstructorCourse[]>;
   fetchInstructorStats: () => Promise<InstructorCourseStats>;
   fetchInstructorCourse: (courseId: string) => Promise<InstructorCourse>;
@@ -97,6 +111,27 @@ export function CourseProvider({ children }: { children: ReactNode }) {
     } finally {
       setCreating(false);
     }
+  }, []);
+
+  const fetchPublicCourses = useCallback(async () => {
+    setError(null);
+
+    const res = await fetch("/api/courses", {
+      method: "GET",
+      headers: {
+        "Content-Type": "application/json",
+      },
+    });
+
+    const data = await res.json().catch(() => null);
+
+    if (!res.ok) {
+      const message = (data && data.message) || "Failed to load courses";
+      setError(message);
+      throw new Error(message);
+    }
+
+    return (data?.courses || []) as PublicCourse[];
   }, []);
 
   const fetchInstructorCourses = useCallback(async () => {
@@ -197,6 +232,7 @@ export function CourseProvider({ children }: { children: ReactNode }) {
     creating,
     error,
     createCourse,
+    fetchPublicCourses,
     fetchInstructorCourses,
     fetchInstructorStats,
     fetchInstructorCourse,
