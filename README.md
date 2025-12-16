@@ -81,7 +81,6 @@ The platform supports **three roles** with role-based dashboards and access:
 - Admin analytics and all-courses page (currently UI-only)  
 - AI endpoint and features (currently placeholder only)  
 - Course progress tracking and recommendations for learners (static/demo data)  
-- Instructor course delete operation (UI-only, DELETE API not implemented)  
 - Payments, email verification, password reset, and account activation flows  
 
 > These areas are intentionally scoped out for MVP clarity and can be extended later.
